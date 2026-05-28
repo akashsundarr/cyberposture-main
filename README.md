@@ -1,11 +1,8 @@
 
 ```
 cyberposture-main
-├─ .lovable
-│  └─ project.json
 ├─ .prettierignore
 ├─ .prettierrc
-├─ bun.lock
 ├─ bunfig.toml
 ├─ components.json
 ├─ eslint.config.js
@@ -16,6 +13,8 @@ cyberposture-main
 ├─ README.md
 ├─ src
 │  ├─ components
+│  │  ├─ AttackSimulationSection.tsx
+│  │  ├─ HVIAssessmentSection.tsx
 │  │  ├─ SiteFooter.tsx
 │  │  ├─ SiteHeader.tsx
 │  │  └─ ui
