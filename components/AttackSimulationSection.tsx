@@ -65,33 +65,40 @@ const nodes = [
 export default function AttackSimulationSection() {
   const [activeStep, setActiveStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [userInteracted, setUserInteracted] = useState(false);
 
   useEffect(() => {
-    if (isPaused) return;
+    // If paused or user has taken manual control, stop the auto-carousel
+    if (isPaused || userInteracted) return;
     
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % steps.length);
     }, 3500);
 
     return () => clearInterval(interval);
-  }, [isPaused]);
+  }, [isPaused, userInteracted]);
 
   const current = useMemo(() => steps[activeStep], [activeStep]);
 
+  const handleManualStep = (index: number) => {
+    setActiveStep(index);
+    setUserInteracted(true); // Permanent pause once they take control
+  };
+
   return (
-    <section className="relative overflow-hidden py-28">
-      <div className="mx-auto max-w-7xl px-6 relative z-10">
+    <section className="relative overflow-hidden py-20 md:py-28">
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         
-        <div className="mb-14 text-center">
-          <p className="mb-3 text-sm uppercase tracking-[0.25em] text-tertiary font-semibold">
+        <div className="mb-10 md:mb-14 text-center">
+          <p className="mb-3 text-[10px] md:text-sm uppercase tracking-[0.25em] font-semibold text-tertiary">
             Human-Centric Threat Intelligence
           </p>
 
-          <h2 className="font-display text-3xl md:text-4xl text-on-surface text-center">
+          <h2 className="font-display text-3xl text-center text-on-surface md:text-4xl">
             Interactive Attack Simulation
           </h2>
 
-          <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-on-surface-variant">
+          <p className="mx-auto mt-4 md:mt-5 max-w-3xl text-sm md:text-base leading-relaxed text-on-surface-variant">
             Visualizing how a single human action escalates into enterprise-wide
             compromise through phishing, lateral movement, privilege escalation,
             ransomware deployment, and data exfiltration.
@@ -101,76 +108,76 @@ export default function AttackSimulationSection() {
         <div className="grid gap-8 lg:grid-cols-[1fr_420px]">
           
           {/* LEFT COLUMN - Split into Graph and Telemetry */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 overflow-hidden">
             
-            {/* 1. NETWORK CANVAS (Isolated & Clean) */}
-            <div className="relative h-[480px] lg:h-[540px] w-full overflow-hidden rounded-lg glass-panel shadow-sm">
-              
-              {/* Subtle tech grid background */}
-              <div
-                className="absolute inset-0 opacity-[0.03]"
-                style={{
-                  backgroundImage: "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
-                  backgroundSize: "40px 40px",
-                  color: "var(--on-surface-variant, gray)"
-                }}
-              />
+            {/* 1. NETWORK CANVAS (Scrollable on Mobile) */}
+            <div className="-mx-6 px-6 lg:mx-0 lg:px-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div className="relative h-[420px] min-w-[650px] w-full overflow-hidden rounded-lg shadow-sm glass-panel sm:h-[480px] lg:h-[540px]">
+                
+                {/* Subtle tech grid background */}
+                <div
+                  className="absolute inset-0 opacity-[0.03]"
+                  style={{
+                    backgroundImage: "linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)",
+                    backgroundSize: "40px 40px",
+                    color: "var(--on-surface-variant, gray)"
+                  }}
+                />
 
-              {/* Straight Orthogonal Connection Lines */}
-              <svg 
-                className="absolute inset-0 h-full w-full" 
-                viewBox="0 0 100 100" 
-                preserveAspectRatio="none"
-              >
-                <g className="text-tertiary">
-                  {/* Attacker -> Phishing */}
-                  <AnimatedPath active={activeStep >= 0} d="M 12 15 L 38 15" />
-                  {/* Phishing -> Employee */}
-                  <AnimatedPath active={activeStep >= 1} d="M 38 15 L 38 50" />
-                  {/* Employee -> Lateral */}
-                  <AnimatedPath active={activeStep >= 2} d="M 38 50 L 64 50" />
-                  {/* Lateral -> Domain (90 degree elbow) */}
-                  <AnimatedPath active={activeStep >= 3} d="M 64 50 L 64 15 L 90 15" />
-                  {/* Lateral -> Ransomware */}
-                  <AnimatedPath active={activeStep >= 4} d="M 64 50 L 90 50" />
-                  {/* Ransomware -> Data */}
-                  <AnimatedPath active={activeStep >= 5} d="M 90 50 L 90 85" />
-                </g>
-              </svg>
+                {/* Straight Orthogonal Connection Lines */}
+                <svg 
+                  className="absolute inset-0 h-full w-full" 
+                  viewBox="0 0 100 100" 
+                  preserveAspectRatio="none"
+                >
+                  <g className="text-tertiary">
+                    <AnimatedPath active={activeStep >= 0} d="M 12 15 L 38 15" />
+                    <AnimatedPath active={activeStep >= 1} d="M 38 15 L 38 50" />
+                    <AnimatedPath active={activeStep >= 2} d="M 38 50 L 64 50" />
+                    <AnimatedPath active={activeStep >= 3} d="M 64 50 L 64 15 L 90 15" />
+                    <AnimatedPath active={activeStep >= 4} d="M 64 50 L 90 50" />
+                    <AnimatedPath active={activeStep >= 5} d="M 90 50 L 90 85" />
+                  </g>
+                </svg>
 
-              {/* Nodes */}
-              {nodes.map((node) => {
-                const Icon = node.icon;
-                const isActive = current.activeNode === node.id;
+                {/* Nodes */}
+                {nodes.map((node) => {
+                  const Icon = node.icon;
+                  const isActive = current.activeNode === node.id;
 
-                return (
-                  <div
-                    key={node.id}
-                    className="absolute z-10"
-                    style={{
-                      left: `${node.x}%`,
-                      top: `${node.y}%`,
-                      transform: "translate(-50%, -50%)",
-                    }}
-                  >
-                    <motion.div
-                      animate={{ scale: isActive ? 1.05 : 1 }}
-                      className={`relative flex h-20 w-20 sm:h-24 sm:w-24 flex-col items-center justify-center rounded-lg glass-panel transition-all duration-300 ${isActive ? 'ring-2 ring-tertiary shadow-[0_0_20px_rgba(0,0,0,0.15)] bg-surface' : ''}`}
+                  return (
+                    <div
+                      key={node.id}
+                      className="absolute z-10"
+                      style={{
+                        left: `${node.x}%`,
+                        top: `${node.y}%`,
+                        transform: "translate(-50%, -50%)",
+                      }}
                     >
-                      <Icon className={`mb-1.5 h-6 w-6 sm:h-7 sm:w-7 transition-colors ${isActive ? 'text-tertiary' : 'text-on-surface-variant'}`} />
-                      <p className={`text-center text-[10px] sm:text-xs font-semibold uppercase tracking-wider ${isActive ? 'text-on-surface' : 'text-on-surface-variant'}`}>
-                        {labelSplit(node.label).map((line, i) => (
-                          <span key={i} className="block">{line}</span>
-                        ))}
-                      </p>
-                    </motion.div>
-                  </div>
-                );
-              })}
+                      <motion.div
+                        animate={{ scale: isActive ? 1.05 : 1 }}
+                        className={`relative flex h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24 flex-col items-center justify-center rounded-lg glass-panel transition-all duration-300 ${
+                          isActive 
+                            ? 'bg-surface ring-2 ring-tertiary shadow-[0_0_20px_rgba(0,0,0,0.15)]' 
+                            : ''
+                        }`}
+                      >
+                        <Icon className={`mb-1 h-5 w-5 sm:mb-1.5 sm:h-6 sm:w-6 lg:h-7 lg:w-7 transition-colors ${isActive ? 'text-tertiary' : 'text-on-surface-variant'}`} />
+                        <p className={`text-center text-[9px] sm:text-[10px] lg:text-xs font-semibold uppercase tracking-wider ${isActive ? 'text-on-surface' : 'text-on-surface-variant'}`}>
+                          {labelSplit(node.label).map((line, i) => (
+                            <span key={i} className="block">{line}</span>
+                          ))}
+                        </p>
+                      </motion.div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* 2. ISOLATED TELEMETRY PANEL */}
-            <div className="relative min-h-[140px] w-full rounded-lg glass-panel overflow-hidden">
+            <div className="relative min-h-[140px] w-full overflow-hidden rounded-lg glass-panel">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current.id}
@@ -178,15 +185,15 @@ export default function AttackSimulationSection() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.25 }}
-                  className="absolute inset-0 p-6 flex flex-col justify-center"
+                  className="absolute inset-0 flex flex-col justify-center p-6"
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="h-2 w-2 rounded-full bg-tertiary animate-pulse" />
-                    <p className="text-xs uppercase tracking-[0.2em] text-tertiary font-bold">
+                  <div className="mb-2 flex items-center gap-3">
+                    <div className="h-2 w-2 animate-pulse rounded-full bg-tertiary" />
+                    <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-tertiary">
                       Telemetry Stream // Step {current.id}
                     </p>
                   </div>
-                  <h3 className="text-xl font-semibold text-on-surface mb-1">
+                  <h3 className="mb-1 text-lg sm:text-xl font-semibold text-on-surface">
                     {current.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-on-surface-variant">
@@ -200,27 +207,28 @@ export default function AttackSimulationSection() {
 
           {/* RIGHT COLUMN - CONTROLS */}
           <div 
-            className="flex flex-col gap-3 lg:gap-4"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-3 lg:gap-4"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
           >
             {steps.map((step, index) => {
               const active = activeStep === index;
               return (
                 <button
                   key={step.id}
-                  onClick={() => setActiveStep(index)}
-                  className={`group relative rounded-lg p-4 text-left transition-all duration-300 glass-panel ${
+                  onClick={() => handleManualStep(index)}
+                  className={`group relative rounded-lg p-3 lg:p-4 text-left transition-all duration-300 glass-panel ${
                     active
-                      ? "ring-2 ring-tertiary bg-surface/50"
+                      ? "bg-surface/50 ring-2 ring-tertiary"
                       : "opacity-60 hover:opacity-100"
                   }`}
                 >
                   <div>
-                    <p className={`mb-1 text-[10px] uppercase tracking-[0.2em] font-semibold transition-colors ${active ? 'text-tertiary' : 'text-on-surface-variant'}`}>
+                    <p className={`mb-1 text-[9px] lg:text-[10px] font-semibold uppercase tracking-[0.2em] transition-colors ${active ? 'text-tertiary' : 'text-on-surface-variant'}`}>
                       Phase 0{step.id}
                     </p>
-                    <h3 className={`text-base font-semibold transition-colors ${active ? 'text-on-surface' : 'text-on-surface-variant'}`}>
+                    <h3 className={`text-sm lg:text-base font-semibold transition-colors ${active ? 'text-on-surface' : 'text-on-surface-variant'}`}>
                       {step.title}
                     </h3>
                   </div>
