@@ -7,7 +7,14 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/products", label: "Products" },
+  {
+    to: "/products",
+    label: "HVI Score",
+    children: [
+      { to: "/products#b2c", label: "B2C" },
+      { to: "/products#b2b", label: "B2B" },
+    ],
+  },
   // { to: "/sentinel", label: "Platform" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
@@ -63,15 +70,38 @@ export function SiteHeader() {
           {NAV.map((item) => {
             const isActive = pathname === item.to;
             return (
-              <Link
-                key={item.to}
-                href={item.to}
-                className={`transition-colors hover:text-primary ${
-                  isActive ? "text-primary font-semibold" : "text-on-surface-variant"
-                }`}
-              >
-                {item.label}
-              </Link>
+              <div key={item.to} className="group relative">
+                <Link
+                  href={item.to}
+                  className={`inline-flex items-center gap-1 transition-colors hover:text-primary ${
+                    isActive ? "text-primary font-semibold" : "text-on-surface-variant"
+                  }`}
+                >
+                  {item.label}
+                  {"children" in item && (
+                    <span className="material-symbols-outlined text-base">
+                      expand_more
+                    </span>
+                  )}
+                </Link>
+
+                {"children" in item && (
+                  <div className="invisible absolute left-1/2 top-full z-50 mt-4 w-56 -translate-x-1/2 rounded-xl border border-outline-variant/25 bg-surface-container-lowest p-2 opacity-0 shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all group-hover:visible group-hover:opacity-100">
+                    <p className="px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-tertiary">
+                      HVI Score
+                    </p>
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.to}
+                        href={child.to}
+                        className="block rounded-lg px-3 py-2 text-sm text-on-surface-variant transition-colors hover:bg-tertiary/10 hover:text-tertiary"
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             );
           })}
         </nav>
@@ -110,16 +140,31 @@ export function SiteHeader() {
               {NAV.map((item) => {
                 const isActive = pathname === item.to;
                 return (
-                  <Link
-                    key={item.to}
-                    href={item.to}
-                    onClick={() => setIsOpen(false)}
-                    className={`text-2xl font-medium transition-colors ${
-                      isActive ? "text-primary" : "text-on-surface"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
+                  <div key={item.to}>
+                    <Link
+                      href={item.to}
+                      onClick={() => setIsOpen(false)}
+                      className={`text-2xl font-medium transition-colors ${
+                        isActive ? "text-primary" : "text-on-surface"
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                    {"children" in item && (
+                      <div className="mt-3 flex flex-col gap-3 pl-4">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.to}
+                            href={child.to}
+                            onClick={() => setIsOpen(false)}
+                            className="text-base font-semibold text-on-surface-variant"
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </nav>

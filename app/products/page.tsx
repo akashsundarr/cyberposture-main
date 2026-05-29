@@ -1,275 +1,266 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import AttackSimulationSection from "@/components/AttackSimulationSection";
 import HVIAssessmentSection from "@/components/HVIAssessmentSection";
 
-type Stage = "question" | "processing" | "result";
+const ease = [0.25, 0.1, 0.25, 1] as const;
 
-// Custom hook for number counting animation
-function useCountUp(target: number, duration = 2000, run = true) {
-  const [val, setVal] = useState(0);
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease },
+  },
+};
+
+const b2cItems = [
+  "Password habits",
+  "Public exposure",
+  "Phishing reflexes",
+  "Pressure response",
+] as const;
+
+const b2bItems = [
+  "Department-level HVI aggregation",
+  "Passive telemetry and enterprise signal mapping",
+  "Pilot planning for CISOs, HR, and risk teams",
+] as const;
+
+type Audience = "b2c" | "b2b";
+
+export default function ProductsPage() {
+  const [audience, setAudience] = useState<Audience>("b2c");
 
   useEffect(() => {
-    if (!run) return;
-
-    let start: number | null = null;
-    let raf = 0;
-
-    const step = (t: number) => {
-      if (start === null) start = t;
-
-      const p = Math.min((t - start) / duration, 1);
-      // Ease out cubic
-      const eased = 1 - Math.pow(1 - p, 3);
-
-      setVal(Math.floor(eased * target));
-
-      if (p < 1) {
-        raf = requestAnimationFrame(step);
-      } else {
-        setVal(target);
+    const setFromHash = () => {
+      if (window.location.hash === "#b2b") setAudience("b2b");
+      if (window.location.hash === "#b2c" || window.location.hash === "#assessment") {
+        setAudience("b2c");
       }
     };
 
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, [target, duration, run]);
+    setFromHash();
+    window.addEventListener("hashchange", setFromHash);
+    return () => window.removeEventListener("hashchange", setFromHash);
+  }, []);
 
-  return val;
-}
-
-export default function ProductsPage() {
-  const hvi = useCountUp(842, 2000);
-
-  // Interactive Demo State
-  const [stage, setStage] = useState<Stage>("question");
-  const [procText, setProcText] = useState("Analyzing behavioral cyber posture…");
-  const procRef = useRef<number | null>(null);
-  const score = useCountUp(742, 1500, stage === "result");
-
-  const startDemo = () => {
-    setStage("processing");
-
-    const texts = [
-      "Analyzing behavioral cyber posture…",
-      "Calculating Human Vulnerability Indicators…",
-      "Finalizing risk model…",
-    ];
-
-    let i = 0;
-    procRef.current = window.setInterval(() => {
-      i = (i + 1) % texts.length;
-      setProcText(texts[i]);
-    }, 1000);
-
-    window.setTimeout(() => {
-      if (procRef.current) window.clearInterval(procRef.current);
-      setStage("result");
-    }, 3000);
-  };
-
-  const resetDemo = () => {
-    if (procRef.current) window.clearInterval(procRef.current);
-    setStage("question");
-    setProcText("Analyzing behavioral cyber posture…");
-  };
-
-  // Framer Motion Variants
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const } }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-  };
+  function selectAudience(nextAudience: Audience) {
+    setAudience(nextAudience);
+    window.history.replaceState(null, "", `/products#${nextAudience}`);
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
 
-      <main className="mx-auto flex w-full max-w-7xl flex-grow flex-col gap-24 px-8 pt-28 pb-24">
-        
-        {/* Hero Section */}
-        <motion.section 
+      <main className="flex-grow px-6 pb-24 pt-32 md:px-8">
+        <motion.section
+          id="hvi-score"
           initial="hidden"
           animate="visible"
-          variants={staggerContainer}
-          className="flex flex-col items-center gap-10 text-center"
-        >
-          <motion.div variants={fadeUp} className="max-w-3xl flex flex-col gap-3">
-            <h1 className="font-display text-5xl text-on-surface md:text-6xl">
-              Aegis <span className="text-gradient-gold">HVI</span>
-            </h1>
-            <p className="font-display text-2xl text-on-surface-variant md:text-3xl">
-              Human Vulnerability Intelligence for modern cyber defense.
-            </p>
-          </motion.div>
-
-          <motion.div variants={fadeUp} className="glass-panel float-anim relative flex min-h-[400px] w-full flex-col items-center justify-center overflow-hidden rounded-xl p-8">
-            <div className="absolute inset-0 z-0 bg-gradient-to-br from-primary-container/50 to-surface-container-highest/30" />
-            <div className="absolute inset-0 z-0 bg-grid-pattern opacity-10 pointer-events-none" />
-
-            <div className="relative z-10 flex flex-col items-center gap-4">
-              <div className="text-[12px] font-bold uppercase tracking-[0.12em] text-on-surface-variant">
-                Global HVI Score
-              </div>
-
-              <div className="font-display text-[80px] leading-none text-tertiary drop-shadow-[0_0_15px_rgba(231,193,133,0.3)]">
-                {hvi}
-              </div>
-
-              <div className="flex items-center gap-2 text-primary">
-                <span className="material-symbols-outlined pulse-radar" style={{ fontVariationSettings: "'FILL' 1" }}>
-                  shield
-                </span>
-                <span className="text-lg font-semibold">Optimized Stance</span>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
-            <a href="#assessment" className="btn-gold rounded-lg px-8 py-3 text-[12px] font-bold uppercase tracking-[0.08em] transition-transform hover:scale-105">
-              Start Assessment
-            </a>
-            <a href="#workflow" className="btn-ghost-gold rounded-lg px-8 py-3 text-[12px] font-bold uppercase tracking-[0.08em] transition-transform hover:scale-105">
-              View Documentation
-            </a>
-          </motion.div>
-        </motion.section>
-
-        {/* Live Terminal Demo (Using your custom state) */}
-        <motion.section 
-          id="assessment" 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
           variants={fadeUp}
-          className="mx-auto w-full max-w-4xl"
+          className="mx-auto max-w-7xl"
         >
-          <div className="glass-panel overflow-hidden rounded-xl border border-outline-variant/30">
-            {/* Terminal Header */}
-            <div className="flex items-center gap-2 border-b border-outline-variant/30 bg-surface-container-lowest/50 px-4 py-3">
-              <div className="h-3 w-3 rounded-full bg-error/80" />
-              <div className="h-3 w-3 rounded-full bg-tertiary/80" />
-              <div className="h-3 w-3 rounded-full bg-primary/80" />
-              <span className="ml-2 font-mono text-[10px] uppercase tracking-wider text-on-surface-variant/50">
-                AEGIS_HVI_TERMINAL_V1.0
-              </span>
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+            One product, two paths
+          </p>
+          <div className="mt-4 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div>
+              <h1 className="font-display text-5xl leading-tight text-on-surface md:text-7xl">
+                HVI Score
+              </h1>
+              <p className="mt-6 max-w-3xl text-base leading-8 text-on-surface-variant md:text-lg">
+                Human Vulnerability Intelligence is one product organized for two
+                audiences: individuals who need a personal risk score, and
+                organizations that need aggregated human-risk visibility.
+              </p>
             </div>
 
-            {/* Terminal Body */}
-            <div className="min-h-[250px] p-8 font-mono text-sm">
-              <AnimatePresence mode="wait">
-                {stage === "question" && (
-                  <motion.div key="q" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex h-full flex-col items-center justify-center gap-6 text-center">
-                    <span className="material-symbols-outlined text-4xl text-on-surface-variant">terminal</span>
-                    <p className="text-on-surface-variant">Ready to initiate live behavioral risk diagnostic.</p>
-                    <button onClick={startDemo} className="btn-ghost-gold rounded px-6 py-2">
-                      Run Diagnostic 
-                    </button>
-                  </motion.div>
-                )}
-
-                {stage === "processing" && (
-                  <motion.div key="p" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col gap-6 pt-10">
-                    <div className="flex items-center gap-3 text-tertiary">
-                      <span className="material-symbols-outlined animate-spin">autorenew</span>
-                      <span>{procText}</span>
-                    </div>
-                    {/* Animated Progress Bar */}
-                    <div className="h-1 w-full overflow-hidden rounded-full bg-surface-container-highest">
-                      <motion.div 
-                        initial={{ width: "0%" }} 
-                        animate={{ width: "100%" }} 
-                        transition={{ duration: 3, ease: "linear" }}
-                        className="h-full bg-gradient-to-r from-primary to-tertiary"
-                      />
-                    </div>
-                  </motion.div>
-                )}
-
-                {stage === "result" && (
-                  <motion.div key="r" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col items-center gap-6 pt-6 text-center">
-                    <div className="text-on-surface-variant">Diagnostic Complete. Target Score:</div>
-                    <div className="text-6xl text-primary drop-shadow-[0_0_10px_rgba(177,204,197,0.3)]">
-                      {score}
-                    </div>
-                    <button onClick={resetDemo} className="text-xs uppercase tracking-widest text-outline hover:text-tertiary">
-                      [ Recalibrate ]
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            <div className="grid gap-3 rounded-xl border border-outline-variant/25 bg-surface-container-low p-4 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => selectAudience("b2c")}
+                className="rounded-lg border border-tertiary/35 bg-tertiary/10 px-5 py-4 text-center text-sm font-bold uppercase tracking-[0.08em] text-tertiary"
+              >
+                B2C: Personal
+              </button>
+              <button
+                type="button"
+                onClick={() => selectAudience("b2b")}
+                className="rounded-lg border border-primary/35 bg-primary-container/35 px-5 py-4 text-center text-sm font-bold uppercase tracking-[0.08em] text-primary"
+              >
+                B2B: Organization
+              </button>
             </div>
           </div>
         </motion.section>
 
-        {/* Workflow */}
-        <motion.section 
-          id="workflow"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="flex flex-col gap-10"
-        >
-          <motion.h2 variants={fadeUp} className="text-center font-display text-3xl text-on-surface md:text-4xl">
-            Intelligence Workflow
-          </motion.h2>
-
-          <div className="grid gap-6 md:grid-cols-3">
+        <section className="mx-auto mt-16 max-w-7xl">
+          <div className="mb-6 flex rounded-xl border border-outline-variant/25 bg-surface-container-low p-2">
             {[
-              { icon: "sensors", title: "Telemetry", desc: "Passive data ingestion without disrupting workflows." },
-              { icon: "memory", title: "Processing", desc: "AI-driven behavioral pattern analysis." },
-              { icon: "query_stats", title: "Insights", desc: "Actionable metrics and automated remediation." },
-            ].map((s) => (
-              <motion.div key={s.title} variants={fadeUp} whileHover={{ y: -5 }} className="glass-panel rounded-lg p-6 text-center">
-                <div className="mb-2 text-tertiary">
-                  <span className="material-symbols-outlined text-4xl">{s.icon}</span>
-                </div>
-                <h3 className="text-lg font-semibold text-on-surface">{s.title}</h3>
-                <p className="mt-2 text-sm text-on-surface-variant">{s.desc}</p>
-              </motion.div>
+              ["b2c", "Individual / Family"],
+              ["b2b", "Organization"],
+            ].map(([value, label]) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => selectAudience(value as Audience)}
+                className={`flex-1 rounded-lg px-4 py-3 text-sm font-bold uppercase tracking-[0.08em] transition-colors ${
+                  audience === value
+                    ? "bg-tertiary text-on-tertiary"
+                    : "text-on-surface-variant hover:bg-background/55"
+                }`}
+              >
+                {label}
+              </button>
             ))}
           </div>
-        </motion.section>
 
-        <AttackSimulationSection />
-        <HVIAssessmentSection />
+          {audience === "b2c" ? (
+          <motion.article
+            id="b2c"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="scroll-mt-28 rounded-xl border border-outline-variant/25 bg-surface-container-low p-6 md:p-8"
+          >
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+              B2C path
+            </p>
+            <h2 className="mt-4 font-display text-4xl leading-tight text-on-surface md:text-5xl">
+              Your personal risk, made visible.
+            </h2>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-on-surface-variant md:text-lg">
+              A fast personal HVI score for the moments where everyday internet
+              behavior becomes exposure.
+            </p>
 
-        {/* CTA */}
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUp}
-          className="glass-panel flex flex-col items-center gap-6 rounded-xl p-12 text-center"
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {[
+                ["0-100", "HVI Score"],
+                ["4", "risk lenses"],
+                ["clear", "next steps"],
+              ].map(([value, label]) => (
+                <div
+                  key={label}
+                  className="rounded-lg border border-tertiary/25 bg-tertiary/10 p-5"
+                >
+                  <p className="font-display text-5xl leading-none text-tertiary">
+                    {value}
+                  </p>
+                  <p className="mt-3 text-sm font-bold uppercase tracking-[0.12em] text-on-surface-variant">
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="mt-8 font-display text-3xl text-on-surface md:text-4xl">
+              What shapes the score
+            </h3>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {b2cItems.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-lg border border-outline-variant/25 bg-background/45 p-5"
+                >
+                  <p className="text-xl font-semibold text-on-surface">{item}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="mt-7 max-w-2xl text-sm leading-7 text-on-surface-variant md:text-base">
+              Get the score, understand the weak spots, and move straight into
+              personal protection.
+            </p>
+            <a
+              href="#assessment"
+              className="btn-gold mt-7 inline-flex rounded-lg px-6 py-3 text-[12px] font-bold uppercase tracking-[0.08em]"
+            >
+              Get My Personal HVI Score
+            </a>
+          </motion.article>
+          ) : (
+
+          <motion.article
+            id="b2b"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="scroll-mt-28 rounded-xl border border-outline-variant/25 bg-surface-container-low p-6 md:p-8"
+          >
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
+              B2B path
+            </p>
+            <h2 className="mt-4 font-display text-4xl leading-tight text-on-surface md:text-5xl">
+              Secure your organization.
+            </h2>
+            <p className="mt-5 text-sm leading-7 text-on-surface-variant md:text-base">
+              The enterprise HVI Score aggregates passive technical and
+              behavioral indicators into a live picture of departmental human
+              risk.
+            </p>
+            <div className="mt-7 grid gap-3">
+              {b2bItems.map((item) => (
+                <div
+                  key={item}
+                  className="flex items-center gap-3 rounded-lg border border-outline-variant/25 bg-background/45 p-4"
+                >
+                  <span className="material-symbols-outlined text-tertiary">
+                    check_circle
+                  </span>
+                  <span className="text-sm text-on-surface-variant">{item}</span>
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/contact"
+              className="btn-ghost-gold mt-7 inline-flex rounded-lg px-6 py-3 text-[12px] font-bold uppercase tracking-[0.08em]"
+            >
+              Book Enterprise Demo
+            </Link>
+          </motion.article>
+          )}
+        </section>
+
+        <section
+          id="workflow"
+          className="mx-auto mt-20 max-w-7xl scroll-mt-28 rounded-xl border border-outline-variant/25 bg-surface-container-low p-6 md:p-8"
         >
-          <h2 className="font-display text-3xl text-on-surface md:text-4xl">
-            Strengthen Human Cyber Resilience
-          </h2>
-
-          <div className="flex flex-wrap justify-center gap-8 text-on-surface-variant">
-            {["Reduce exposure", "Improve resilience", "Detect anomalies"].map((l) => (
-              <div key={l} className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-primary">check_circle</span>
-                {l}
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+            HVI Score workflow
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {[
+              ["01", "Capture signals", "Collect personal responses or enterprise passive telemetry."],
+              ["02", "Calculate HVI", "Convert risk indicators into a clear HVI Score."],
+              ["03", "Route action", "Send users to personal remediation or enterprise pilot planning."],
+            ].map(([step, title, copy]) => (
+              <div
+                key={step}
+                className="rounded-lg border border-outline-variant/25 bg-background/45 p-5"
+              >
+                <p className="font-display text-3xl text-tertiary">{step}</p>
+                <h3 className="mt-4 text-xl font-semibold text-on-surface">
+                  {title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-on-surface-variant">
+                  {copy}
+                </p>
               </div>
             ))}
           </div>
+        </section>
 
-          <Link href="/contact" className="btn-gold rounded px-10 py-4 text-[12px] font-bold uppercase tracking-[0.1em] hover:scale-105 transition-transform">
-            Request Demo
-          </Link>
-        </motion.section>
+        <div id="assessment" className="scroll-mt-28">
+          <HVIAssessmentSection />
+        </div>
       </main>
 
       <SiteFooter />
