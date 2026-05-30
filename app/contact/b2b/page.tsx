@@ -1,45 +1,72 @@
-import { AudienceContactPage } from "@/components/AudienceContactPage";
 
-export default function B2BContactPage() {
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+
+export default function ContactB2BPage() {
   return (
-    <AudienceContactPage
-      config={{
-        audience: "Business",
-        eyebrow: "Business contact",
-        title: "Book an enterprise HVI demo.",
-        copy: "Talk with CyberPosture about organization-wide HVI scoring, passive OSINT visibility, Internet Attack Surface review, pilot scope, and rollout planning.",
-        formTitle: "Enterprise demo request",
-        successTitle: "Enterprise request received",
-        successCopy: "Thanks. Our enterprise team will review the context and follow up with demo timing and pilot-fit questions.",
-        emailLabel: "Work Email",
-        emailPlaceholder: "alex@company.com",
-        orgLabel: "Organization",
-        orgPlaceholder: "Company or institution name",
-        phoneLabel: "Business Phone",
-        phonePlaceholder: "+1 (555) 010-2040",
-        intentLabel: "Enterprise Need",
-        intentOptions: [
-          "Book Enterprise Demo",
-          "Discuss OSINT / IAS Module",
-          "Plan HVI Pilot",
-          "Pricing and Procurement",
-        ],
-        messagePlaceholder: "Share team size, use case, timeline, or the risk areas you want to evaluate.",
-        submitLabel: "Request Enterprise Demo",
-        sideTitle: "Built for security and risk teams.",
-        sideCopy: "We will route the request toward the right enterprise conversation: HVI pilot design, passive exposure review, stakeholder alignment, or procurement planning.",
-        highlights: [
-          ["Best for", "CISOs, risk leaders, HR security partners, compliance teams, and managed security providers."],
-          ["Typical scope", "Department-level HVI, OSINT coverage, IAS findings, remediation themes, and executive reporting."],
-          ["Next step", "A short discovery call followed by a demo or scoped pilot plan."],
-        ],
-        phoneContacts: [
-          ["Business Sales", "+1 (800) 555-0199", "tel:+18005550199"],
-          ["Enterprise Support", "+1 (800) 555-0144", "tel:+18005550144"],
-        ],
-        alternateHref: "/contact/b2c",
-        alternateLabel: "Go to Personal Contact",
-      }}
-    />
+    <div className="flex min-h-screen flex-col bg-background">
+      <SiteHeader />
+
+      <main className="flex-grow px-6 py-20 md:px-8 md:py-28">
+        <div className="mx-auto max-w-4xl">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
+            Enterprise Inquiry
+          </p>
+
+          <h1 className="mt-4 font-display text-5xl text-on-surface">
+            Talk To Our Enterprise Team
+          </h1>
+
+          <p className="mt-6 text-lg leading-8 text-on-surface-variant">
+            Learn how Human Vulnerability Intelligence can help your
+            organization measure, monitor, and reduce human risk.
+          </p>
+
+          <form className="mt-12 grid gap-5">
+            <input className="ghost-input p-4" placeholder="Full Name" />
+
+            <input
+              className="ghost-input p-4"
+              placeholder="Corporate Email"
+            />
+
+            <input
+              className="ghost-input p-4"
+              placeholder="Company Name"
+            />
+
+            <select className="ghost-input p-4">
+              <option>Employee Count</option>
+              <option>1–50</option>
+              <option>51–200</option>
+              <option>201–500</option>
+              <option>501–1000</option>
+              <option>1000+</option>
+            </select>
+
+            <select className="ghost-input p-4">
+              <option>Primary Security Concern</option>
+              <option>Human Risk Visibility</option>
+              <option>Phishing</option>
+              <option>Insider Risk</option>
+              <option>Compliance</option>
+              <option>Other</option>
+            </select>
+
+            <textarea
+              rows={8}
+              className="ghost-input resize-none p-4"
+              placeholder="Tell us about your organization and challenge"
+            />
+
+            <button className="btn-gold rounded-xl px-8 py-4">
+              Request Consultation
+            </button>
+          </form>
+        </div>
+      </main>
+
+      <SiteFooter />
+    </div>
   );
 }

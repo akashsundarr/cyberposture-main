@@ -6,25 +6,54 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV = [
-  { to: "/", label: "Home" },
+  {
+    to: "/",
+    label: "Home",
+  },
   {
     to: "/products",
     label: "Product",
-    menuTitle: "HVI",
+    menuTitle: "Platform",
     children: [
-      { to: "/products#b2c", label: "Personal" },
-      { to: "/products#b2b", label: "Business" },
+      {
+        to: "/products#b2c",
+        label: "Human Vulnerability Intelligence",
+      },
+      {
+        to: "/products#enterprise",
+        label: "Enterprise Human Risk OS",
+      },
+      {
+        to: "/ai-governance",
+        label: "AI Governance Suite",
+      },
+      {
+        to: "/ramp",
+        label: "R.A.M.P.",
+      },
     ],
   },
-  // { to: "/sentinel", label: "Platform" },
-  { to: "/about", label: "About" },
+  {
+    to: "/about",
+    label: "About",
+  },
+  {
+    to: "/careers",
+    label: "Careers",
+  },
   {
     to: "/contact",
     label: "Contact",
     menuTitle: "Contact",
     children: [
-      { to: "/contact/b2c", label: "Personal Contact" },
-      { to: "/contact/b2b", label: "Business Contact" },
+      {
+        to: "/contact/b2c",
+        label: "Personal Support",
+      },
+      {
+        to: "/contact/b2b",
+        label: "Enterprise Inquiry",
+      },
     ],
   },
 ] as const;
@@ -59,7 +88,7 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-surface/70 shadow-md backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-8">
-        
+
         {/* Brand Group */}
         <div className="flex items-baseline gap-3">
           <Link
@@ -69,8 +98,8 @@ export function SiteHeader() {
           >
             CyberPosture
           </Link>
-          <span className="hidden text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50 md:inline-block">
-            by OwnTheSite
+          <span className="hidden text-[10px] font-bold  tracking-widest text-on-surface-variant/50 md:inline-block">
+            .ai
           </span>
         </div>
 
@@ -82,9 +111,8 @@ export function SiteHeader() {
               <div key={item.to} className="group relative">
                 <Link
                   href={item.to}
-                  className={`inline-flex items-center gap-1 transition-colors hover:text-primary ${
-                    isActive ? "text-primary font-semibold" : "text-on-surface-variant"
-                  }`}
+                  className={`inline-flex items-center gap-1 transition-colors hover:text-primary ${isActive ? "text-primary font-semibold" : "text-on-surface-variant"
+                    }`}
                 >
                   {item.label}
                   {"children" in item && (
@@ -117,10 +145,10 @@ export function SiteHeader() {
 
         {/* Desktop CTA */}
         <Link
-          href="/contact/b2b"
-          className="btn-gold hidden rounded-lg px-5 py-2 text-[12px] font-bold uppercase tracking-[0.08em] transition-transform hover:scale-105 active:scale-95 md:inline-flex"
+          href="/products#simulation"
+          className="btn-gold hidden rounded-lg px-5 py-2 text-[12px] font-bold uppercase tracking-[0.08em] md:inline-flex"
         >
-          Request Demo
+          Experience Simulation
         </Link>
 
         {/* Mobile Menu Toggle */}
@@ -153,9 +181,8 @@ export function SiteHeader() {
                     <Link
                       href={item.to}
                       onClick={() => setIsOpen(false)}
-                      className={`text-2xl font-medium transition-colors ${
-                        isActive ? "text-primary" : "text-on-surface"
-                      }`}
+                      className={`text-2xl font-medium transition-colors ${isActive ? "text-primary" : "text-on-surface"
+                        }`}
                     >
                       {item.label}
                     </Link>
@@ -186,7 +213,7 @@ export function SiteHeader() {
               >
                 Request Demo
               </Link>
-              
+
               <span className="text-center text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50">
                 Powered by OwnTheSite
               </span>

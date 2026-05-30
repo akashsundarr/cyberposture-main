@@ -29,24 +29,28 @@ const itemVariants: Variants = {
   },
 };
 
+
 const portalCards = [
   {
-    audience: "Personal",
-    icon: "family_restroom",
+    audience: "Individual",
     title: "Protect Yourself & Your Family",
-    copy: "Start with a simple personal path that turns everyday digital patterns into clear next steps.",
+    icon: "shield_person",
+    copy:
+      "Measure susceptibility to phishing, identity theft, social engineering, and manipulation. Discover your Human Vulnerability Index and receive personalized recommendations to strengthen your digital resilience.",
+    cta: "Explore Personal HVI",
     href: "/products#b2c",
-    cta: "View Personal Path",
   },
   {
-    audience: "Business",
-    icon: "corporate_fare",
+    audience: "Enterprise",
     title: "Secure Your Organization",
-    copy: "Route teams into a business path for signal mapping, exposure review, and pilot planning.",
-    href: "/products#b2b",
-    cta: "View Business Path",
+    icon: "business_center",
+    copy:
+      "Continuously measure human risk, behavioral exposure, and organizational attack surface. Gain visibility into the human factors that influence security outcomes across your workforce.",
+    cta: "Explore Enterprise HVI",
+    href: "/products#enterprise",
   },
-] as const;
+];
+
 
 const threatInboxItems = [
   {
@@ -85,7 +89,7 @@ const threatInboxItems = [
     signal: "Broad OAuth scope, external sender, familiar workflow",
     risk: "Cloud data exposure",
   },
-  ] as const;
+] as const;
 
 const osintScanLines = [
   "$ cyberposture osint.lookup --scope approved-domain --mode passive",
@@ -277,11 +281,10 @@ function HeroOsintPreview() {
                       key={item.title}
                       type="button"
                       onClick={() => setActiveThreat(index)}
-                      className={`absolute inset-x-0 rounded-2xl border text-left shadow-[0_18px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-500 ${
-                        isActive
-                          ? "border-white/25 bg-white/[0.16] p-4"
-                          : "border-white/10 bg-white/[0.075] p-3 hover:bg-white/[0.11]"
-                      }`}
+                      className={`absolute inset-x-0 rounded-2xl border text-left shadow-[0_18px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl transition-all duration-500 ${isActive
+                        ? "border-white/25 bg-white/[0.16] p-4"
+                        : "border-white/10 bg-white/[0.075] p-3 hover:bg-white/[0.11]"
+                        }`}
                       style={{
                         top: `${offset * 18}px`,
                         zIndex: threatInboxItems.length - offset,
@@ -320,7 +323,7 @@ function HeroOsintPreview() {
                   );
                 })}
 
-                
+
               </div>
 
               <div className="mt-4 flex justify-center gap-1.5">
@@ -329,9 +332,8 @@ function HeroOsintPreview() {
                     key={`${item.title}-dot`}
                     type="button"
                     onClick={() => setActiveThreat(index)}
-                    className={`h-1.5 rounded-full transition-all ${
-                      activeThreat === index ? "w-6 bg-white/70" : "w-1.5 bg-white/25"
-                    }`}
+                    className={`h-1.5 rounded-full transition-all ${activeThreat === index ? "w-6 bg-white/70" : "w-1.5 bg-white/25"
+                      }`}
                     aria-label={`Show ${item.channel} notification`}
                   />
                 ))}
@@ -569,11 +571,10 @@ function IasPerspectiveSection() {
                         {item.title}
                       </h4>
                       <span
-                        className={`rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] ${
-                          item.severity === "High"
-                            ? "border-error/35 text-error"
-                            : "border-tertiary/35 text-tertiary"
-                        }`}
+                        className={`rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] ${item.severity === "High"
+                          ? "border-error/35 text-error"
+                          : "border-tertiary/35 text-tertiary"
+                          }`}
                       >
                         {item.severity}
                       </span>
@@ -615,32 +616,51 @@ export default function HomePage() {
               animate="visible"
               className="flex max-w-5xl flex-col items-center text-center"
             >
+
               <motion.h1
                 variants={itemVariants}
                 className="max-w-5xl font-display text-5xl leading-[1.02] text-white sm:text-6xl md:text-7xl"
               >
-                See the shape of risk before it becomes real.
+                Human Vulnerability Intelligence
               </motion.h1>
-
-              <motion.p
-                variants={itemVariants}
-                className="mt-6 max-w-3xl text-base leading-8 text-white/68 md:text-xl"
-              >
-                A quiet layer for exposure, pressure, and digital decisions.
-                Abstract enough to see patterns. Direct enough to act.
-              </motion.p>
 
               <motion.div
                 variants={itemVariants}
-                className="mt-9 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row"
+                className="mt-8 max-w-4xl text-center"
+              >
+                <p className="text-2xl font-medium text-tertiary md:text-3xl">
+                  Reduce the Human Risk Factor in Cybersecurity
+                </p>
+
+                <p className="mt-8 text-lg leading-8 text-white/80 md:text-xl">
+                  Cyberattacks don't begin with malware.
+                  <br />
+                  They begin with people.
+                </p>
+
+                <p className="mt-6 text-base leading-8 text-white/65 md:text-lg">
+                  Measure personal vulnerability.
+                  <br />
+                  Map organizational risk.
+                  <br />
+                  Reduce exposure before attackers exploit it.
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="mt-10 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row"
               >
                 <Link
-                  href="/products#assessment"
+                  href="/products#simulation"
                   className="btn-gold inline-flex items-center justify-center gap-3 rounded-2xl px-7 py-4 text-center text-[12px] font-bold uppercase tracking-[0.08em] shadow-[0_14px_40px_rgba(0,0,0,0.35)] transition-transform hover:scale-105 active:scale-95"
                 >
-                  Take the HVI Assessment
-                  <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                  Experience the Simulation
+                  <span className="material-symbols-outlined text-lg">
+                    arrow_forward
+                  </span>
                 </Link>
+
                 <Link
                   href="#choose-path"
                   className="rounded-lg border border-white/20 px-7 py-4 text-center text-[12px] font-bold uppercase tracking-[0.08em] text-on-surface transition-colors hover:bg-white/5"
@@ -648,6 +668,7 @@ export default function HomePage() {
                   Choose Your Path
                 </Link>
               </motion.div>
+
             </motion.div>
 
             <motion.div
@@ -656,13 +677,11 @@ export default function HomePage() {
               animate="visible"
               className="mt-10 w-full scroll-mt-24 md:mt-12"
             >
-              <HeroOsintPreview />
+
             </motion.div>
           </div>
         </section>
 
-        <IasPerspectiveSection />
-        <OsintScansModule />
 
         <section
           id="choose-path"
@@ -675,14 +694,24 @@ export default function HomePage() {
             viewport={{ once: true, amount: 0.25 }}
             className="mx-auto max-w-7xl"
           >
+
+
             <motion.div variants={itemVariants} className="mx-auto max-w-3xl text-center">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-                Dual audience portal
+                Choose Your Path
               </p>
+
               <h2 className="mt-4 font-display text-4xl leading-tight text-on-surface md:text-5xl">
-                Two entry points, one human-risk platform.
+                Protect Yourself Or Secure Your Organization
               </h2>
+
+              <p className="mt-5 text-base leading-8 text-on-surface-variant">
+                Human Vulnerability Intelligence serves both individuals and enterprises.
+                Select the path that best matches your security needs.
+              </p>
             </motion.div>
+
+
 
             <div className="mt-10 grid gap-5 lg:grid-cols-2">
               {portalCards.map((card) => (
@@ -719,6 +748,331 @@ export default function HomePage() {
             </div>
           </motion.div>
         </section>
+
+        {/* WhyHumanRiskSection */}
+        <section className="border-y border-outline-variant/20 bg-background/60 px-6 py-16 md:px-8 md:py-20">
+          <div className="mx-auto max-w-7xl">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.25 }}
+            >
+              <motion.div
+                variants={itemVariants}
+                className="mx-auto max-w-3xl text-center"
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+                  Why Human Risk Matters
+                </p>
+
+                <h2 className="mt-4 font-display text-4xl leading-tight text-on-surface md:text-5xl">
+                  The Human Layer Remains The Most Exploited Attack Surface
+                </h2>
+
+                <p className="mt-5 text-base leading-8 text-on-surface-variant">
+                  Organizations invest heavily in technical controls, yet attackers
+                  continue to exploit human behavior, decision-making, and trust.
+                </p>
+              </motion.div>
+
+              <div className="mt-12 grid gap-5 lg:grid-cols-3">
+                <motion.article
+                  variants={itemVariants}
+                  className="rounded-2xl border border-tertiary/25 bg-tertiary/10 p-8"
+                >
+                  <div className="font-display text-6xl leading-none text-tertiary md:text-7xl">
+                    74%
+                  </div>
+
+                  <h3 className="mt-5 text-2xl font-semibold text-on-surface">
+                    Human Element
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-7 text-on-surface-variant">
+                    Of breaches involve human actions such as phishing,
+                    credential compromise, social engineering, or misuse.
+                  </p>
+                </motion.article>
+
+                <motion.article
+                  variants={itemVariants}
+                  className="rounded-2xl border border-outline-variant/25 bg-surface-container-low/55 p-8"
+                >
+                  <div className="font-display text-6xl leading-none text-primary md:text-7xl">
+                    95%
+                  </div>
+
+                  <h3 className="mt-5 text-2xl font-semibold text-on-surface">
+                    Human Decisions
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-7 text-on-surface-variant">
+                    Of cybersecurity failures can be traced back to human
+                    decisions, errors, fatigue, or process breakdowns.
+                  </p>
+                </motion.article>
+
+                <motion.article
+                  variants={itemVariants}
+                  className="rounded-2xl border border-outline-variant/25 bg-surface-container-low/55 p-8"
+                >
+                  <div className="font-display text-4xl leading-none text-tertiary md:text-5xl">
+                    Human Risk
+                  </div>
+
+                  <h3 className="mt-5 text-2xl font-semibold text-on-surface">
+                    Least Measured
+                  </h3>
+
+                  <p className="mt-4 text-sm leading-7 text-on-surface-variant">
+                    Despite being central to modern attacks, human risk remains
+                    one of the least measured components of cybersecurity programs.
+                  </p>
+                </motion.article>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Why Human Risk Matters */}
+
+        <section className="border-y border-outline-variant/20 bg-surface-container-low/40 px-6 py-16 md:px-8 md:py-20">
+          <div className="mx-auto max-w-7xl">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.25 }}
+            >
+              <motion.div
+                variants={itemVariants}
+                className="mx-auto max-w-3xl text-center"
+              >
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+                  Platform Overview
+                </p>
+
+                <h2 className="mt-4 font-display text-4xl leading-tight text-on-surface md:text-5xl">
+                  One Platform. Two Perspectives.
+                </h2>
+
+                <p className="mt-5 text-base leading-8 text-on-surface-variant">
+                  Whether you're protecting your personal digital life or managing
+                  risk across an enterprise, Human Vulnerability Intelligence provides
+                  visibility into the human factors attackers exploit.
+                </p>
+              </motion.div>
+
+              <div className="mt-12 grid gap-6 lg:grid-cols-2">
+                {/* Personal HVI */}
+                <motion.article
+                  variants={itemVariants}
+                  whileHover={{ y: -6 }}
+                  className="rounded-2xl border border-tertiary/25 bg-tertiary/10 p-8"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="material-symbols-outlined text-3xl text-tertiary">
+                      shield_person
+                    </span>
+
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+                        Personal
+                      </p>
+
+                      <h3 className="mt-1 text-3xl font-semibold text-on-surface">
+                        Human Vulnerability Index
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="mt-6 text-on-surface-variant">
+                    Measure susceptibility to phishing, identity theft,
+                    manipulation, and social engineering through a
+                    personalized assessment.
+                  </p>
+
+                  <div className="mt-8 grid gap-3">
+                    {[
+                      "Password Hygiene",
+                      "Social Exposure",
+                      "Phishing Recognition",
+                      "Fear & Urgency Resistance",
+                    ].map((item) => (
+                      <div
+                        key={item}
+                        className="rounded-lg border border-white/10 bg-background/30 px-4 py-3"
+                      >
+                        <span className="text-sm text-on-surface">
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link
+                    href="/products#b2c"
+                    className="mt-8 inline-flex rounded-lg border border-tertiary/35 px-5 py-3 text-sm font-bold text-tertiary transition-colors hover:bg-tertiary/10"
+                  >
+                    View Personal Assessment
+                  </Link>
+                </motion.article>
+
+                {/* Enterprise */}
+                <motion.article
+                  variants={itemVariants}
+                  whileHover={{ y: -6 }}
+                  className="rounded-2xl border border-primary/25 bg-primary-container/10 p-8"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="material-symbols-outlined text-3xl text-primary">
+                      business_center
+                    </span>
+
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
+                        Enterprise
+                      </p>
+
+                      <h3 className="mt-1 text-3xl font-semibold text-on-surface">
+                        Human Risk Operating System
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="mt-6 text-on-surface-variant">
+                    Continuously measure and reduce organizational human risk
+                    using behavioral intelligence and passive telemetry.
+                  </p>
+
+                  <div className="mt-8 grid gap-3">
+                    {[
+                      "Inherent Impact",
+                      "Behavioral Susceptibility",
+                      "Context & Mindset",
+                      "Continuous Assurance",
+                    ].map((item) => (
+                      <div
+                        key={item}
+                        className="rounded-lg border border-white/10 bg-background/30 px-4 py-3"
+                      >
+                        <span className="text-sm text-on-surface">
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Link
+                    href="/products#enterprise"
+                    className="mt-8 inline-flex rounded-lg border border-primary/35 px-5 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary/10"
+                  >
+                    View Enterprise Platform
+                  </Link>
+                </motion.article>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* HomeCTASection */}
+        <section className="relative overflow-hidden px-6 py-20 md:px-8 md:py-24">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(231,193,133,0.18),transparent_30%)]" />
+
+          <div className="relative mx-auto max-w-5xl">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.25 }}
+              className="rounded-3xl border border-tertiary/25 bg-surface-container-low/60 p-10 text-center backdrop-blur-xl md:p-14"
+            >
+              <motion.p
+                variants={itemVariants}
+                className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary"
+              >
+                Start Your Journey
+              </motion.p>
+
+              <motion.h2
+                variants={itemVariants}
+                className="mt-4 font-display text-4xl leading-tight text-on-surface md:text-6xl"
+              >
+                Ready to See Your Human Risk Profile?
+              </motion.h2>
+
+              <motion.p
+                variants={itemVariants}
+                className="mx-auto mt-6 max-w-3xl text-base leading-8 text-on-surface-variant md:text-lg"
+              >
+                Explore how attackers exploit human behavior, measure personal
+                vulnerability, and discover how Human Vulnerability Intelligence
+                helps individuals and organizations reduce exposure before risk
+                becomes reality.
+              </motion.p>
+
+              <motion.div
+                variants={itemVariants}
+                className="mt-10 flex flex-col items-center"
+              >
+                <div className="flex flex-col justify-center gap-4 sm:flex-row">
+                  <Link
+                    href="/products#simulation"
+                    className="btn-gold inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 text-[12px] font-bold uppercase tracking-[0.08em]"
+                  >
+                    Experience the Simulation
+                    <span className="material-symbols-outlined text-lg">
+                      arrow_forward
+                    </span>
+                  </Link>
+
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center justify-center rounded-2xl border border-white/20 px-8 py-4 text-[12px] font-bold uppercase tracking-[0.08em] text-on-surface transition-colors hover:bg-white/5"
+                  >
+                    Contact Us
+                  </Link>
+                </div>
+
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm">
+                  <Link
+                    href="/products#b2c"
+                    className="text-tertiary transition-opacity hover:opacity-80"
+                  >
+                    Human Vulnerability Intelligence →
+                  </Link>
+
+                  <Link
+                    href="/products#enterprise"
+                    className="text-tertiary transition-opacity hover:opacity-80"
+                  >
+                    Enterprise Human Risk OS →
+                  </Link>
+
+                  <Link
+                    href="/ai-governance"
+                    className="text-tertiary transition-opacity hover:opacity-80"
+                  >
+                    AI Governance Suite →
+                  </Link>
+
+                  <Link
+                    href="/ramp"
+                    className="text-tertiary transition-opacity hover:opacity-80"
+                  >
+                    R.A.M.P. →
+                  </Link>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
+
+
+
+
+
 
       </main>
 
