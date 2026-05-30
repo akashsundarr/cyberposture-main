@@ -163,13 +163,13 @@ export default function HVIAssessmentSection() {
         {/* HEADER */}
         <div className="mb-10 md:mb-16 text-center">
           <p className="mb-2 md:mb-3 text-[10px] md:text-sm font-semibold uppercase tracking-[0.25em] text-tertiary">
-            Human Vulnerability Intelligence
+            Human Vulnerability Index
           </p>
           <h2 className="font-display text-3xl text-on-surface md:text-5xl">
             Interactive HVI Assessment
           </h2>
           <p className="mx-auto mt-4 md:mt-5 max-w-3xl text-sm md:text-base leading-7 text-on-surface-variant px-4">
-            Experience a simplified Human Vulnerability Intelligence evaluation
+            Experience a simplified Human Vulnerability Index evaluation
             powered by behavioral cyber risk analytics and adaptive threat intelligence.
           </p>
         </div>

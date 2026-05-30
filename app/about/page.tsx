@@ -40,7 +40,7 @@ export default function AboutPage() {
             </h2>
 
             <p className="mt-8 text-lg leading-9 text-on-surface-variant">
-              Human Vulnerability Intelligence exists to help individuals
+              Human Vulnerability Index exists to help individuals
               and organizations understand, measure, and reduce the human
               risk factor in cybersecurity.
             </p>
@@ -83,7 +83,7 @@ export default function AboutPage() {
 
               <div className="rounded-2xl border border-tertiary/20 bg-tertiary/5 p-8">
                 <h3 className="text-2xl font-semibold text-on-surface">
-                  Human Vulnerability Intelligence
+                  Human Vulnerability Index
                 </h3>
 
                 <ul className="mt-8 space-y-4 text-on-surface-variant">
@@ -196,7 +196,7 @@ export default function AboutPage() {
             </h2>
 
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-on-surface-variant">
-              Explore Human Vulnerability Intelligence and discover
+              Explore Human Vulnerability Index and discover
               how measuring human risk can improve security outcomes.
             </p>
 

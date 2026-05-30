@@ -17,7 +17,7 @@ const NAV = [
     children: [
       {
         to: "/products#b2c",
-        label: "Human Vulnerability Intelligence",
+        label: "Human Vulnerability Index",
       },
       {
         to: "/products#enterprise",

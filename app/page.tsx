@@ -621,7 +621,7 @@ export default function HomePage() {
                 variants={itemVariants}
                 className="max-w-5xl font-display text-5xl leading-[1.02] text-white sm:text-6xl md:text-7xl"
               >
-                Human Vulnerability Intelligence
+                Human Vulnerability Index
               </motion.h1>
 
               <motion.div
@@ -706,7 +706,7 @@ export default function HomePage() {
               </h2>
 
               <p className="mt-5 text-base leading-8 text-on-surface-variant">
-                Human Vulnerability Intelligence serves both individuals and enterprises.
+                Human Vulnerability Index serves both individuals and enterprises.
                 Select the path that best matches your security needs.
               </p>
             </motion.div>
@@ -859,7 +859,7 @@ export default function HomePage() {
 
                 <p className="mt-5 text-base leading-8 text-on-surface-variant">
                   Whether you're protecting your personal digital life or managing
-                  risk across an enterprise, Human Vulnerability Intelligence provides
+                  risk across an enterprise, Human Vulnerability Index provides
                   visibility into the human factors attackers exploit.
                 </p>
               </motion.div>
@@ -1007,7 +1007,7 @@ export default function HomePage() {
                 className="mx-auto mt-6 max-w-3xl text-base leading-8 text-on-surface-variant md:text-lg"
               >
                 Explore how attackers exploit human behavior, measure personal
-                vulnerability, and discover how Human Vulnerability Intelligence
+                vulnerability, and discover how Human Vulnerability Index
                 helps individuals and organizations reduce exposure before risk
                 becomes reality.
               </motion.p>
@@ -1040,7 +1040,7 @@ export default function HomePage() {
                     href="/products#b2c"
                     className="text-tertiary transition-opacity hover:opacity-80"
                   >
-                    Human Vulnerability Intelligence →
+                    Human Vulnerability Index →
                   </Link>
 
                   <Link

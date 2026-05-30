@@ -69,7 +69,7 @@ const roles = [
     title: "Security Program Manager",
     type: "Enterprise Delivery & Customer Success",
     focus:
-      "Manage enterprise pilot deployments and continuous risk reduction initiatives. Act as the bridge between CISOs, SOC teams, and engineering groups to ensure successful adoption of Human Vulnerability Intelligence.",
+      "Manage enterprise pilot deployments and continuous risk reduction initiatives. Act as the bridge between CISOs, SOC teams, and engineering groups to ensure successful adoption of Human Vulnerability Index.",
 
     responsibilities: [
       "Manage enterprise pilot programs",

@@ -19,7 +19,7 @@ const timeline = [
     phase: "Months 3–4",
     title: "Contextual Nudging",
     description:
-      "Human Vulnerability Intelligence identifies elevated risk conditions and deploys targeted interventions to the right teams at the right moment.",
+      "Human Vulnerability Index identifies elevated risk conditions and deploys targeted interventions to the right teams at the right moment.",
     outcomes: [
       "Department-specific micro nudges",
       "Reduced behavioral security slips",

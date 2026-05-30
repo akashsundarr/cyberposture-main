@@ -18,7 +18,7 @@ export default function ChoosePathSection() {
 
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-on-surface-variant">
             Whether you're protecting yourself or securing an
-            organization, Human Vulnerability Intelligence
+            organization, Human Vulnerability Index
             provides visibility into the risks attackers exploit.
           </p>
         </div>

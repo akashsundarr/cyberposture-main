@@ -18,7 +18,7 @@ export default function ContactB2BPage() {
           </h1>
 
           <p className="mt-6 text-lg leading-8 text-on-surface-variant">
-            Learn how Human Vulnerability Intelligence can help your
+            Learn how Human Vulnerability Index can help your
             organization measure, monitor, and reduce human risk.
           </p>
 

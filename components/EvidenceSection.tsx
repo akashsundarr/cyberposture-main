@@ -80,7 +80,7 @@ export default function EvidenceSection() {
           </h2>
 
           <p className="mt-6 max-w-3xl text-lg leading-8 text-white/70">
-            Human Vulnerability Intelligence is designed around observed
+            Human Vulnerability Index is designed around observed
             industry-wide attack patterns, behavioral security research,
             and real-world breach trends.
           </p>

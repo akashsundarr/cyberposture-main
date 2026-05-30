@@ -82,7 +82,7 @@ export default function EnterpriseSection() {
           <p className="mt-6 max-w-3xl text-lg leading-8 text-white/70">
             Traditional security awareness programs rely on surveys,
             compliance checklists, and simulated phishing campaigns.
-            Human Vulnerability Intelligence continuously maps human risk
+            Human Vulnerability Index continuously maps human risk
             across the organization without disrupting employee workflows.
           </p>
         </motion.div>
@@ -136,7 +136,7 @@ export default function EnterpriseSection() {
           </h3>
 
           <p className="mt-5 max-w-3xl text-white/70">
-            Human Vulnerability Intelligence operates behind a strict
+            Human Vulnerability Index operates behind a strict
             privacy firewall. The platform focuses on technical and
             behavioral indicators, not employee evaluation.
           </p>
@@ -273,7 +273,7 @@ export default function EnterpriseSection() {
           </h3>
 
           <p className="mx-auto mt-5 max-w-2xl text-white/70">
-            Explore how Human Vulnerability Intelligence can reveal
+            Explore how Human Vulnerability Index can reveal
             organizational blind spots and reduce enterprise risk through
             continuous assessment and contextual intervention.
           </p>
