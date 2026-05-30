@@ -340,6 +340,7 @@ function HeroOsintPreview() {
           </div>
         </div>
       </div>
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-28 bg-gradient-to-b from-transparent via-background/70 to-background sm:h-36" />
     </motion.div>
   );
 
