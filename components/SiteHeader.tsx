@@ -12,7 +12,7 @@ const NAV = [
   },
   {
     to: "/products",
-    label: "Product",
+    label: "Products",
     menuTitle: "Platform",
     children: [
       {
