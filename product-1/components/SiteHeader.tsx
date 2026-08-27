@@ -22,6 +22,9 @@ const NAV = [
       {
         to: "/ai-governance",
         label: "AI Governance Suite",
+      },{
+        to: "/ramp",
+        label: "RAMP",
       },
 
     ],
