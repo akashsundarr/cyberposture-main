@@ -87,7 +87,7 @@ export function SiteHeader() {
           </Link>
 
           <span className="text-sm font-medium text-on-surface-variant/60">
-            .ai
+            
           </span>
         </div>
 
