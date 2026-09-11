@@ -29,6 +29,34 @@ const itemVariants: Variants = {
   },
 };
 
+
+const rampHighlights = [
+  {
+    number: "01",
+    title: "Assess",
+    description:
+      "Assess controls and AI posture to establish a measurable readiness baseline.",
+  },
+  {
+    number: "02",
+    title: "Quantify",
+    description:
+      "Use FAIR-based Value-at-Risk scenarios to express selected cyber and AI risks in business terms.",
+  },
+  {
+    number: "03",
+    title: "Remediate",
+    description:
+      "Turn findings into tracked risk and remediation actions, then re-test as work is completed.",
+  },
+  {
+    number: "04",
+    title: "Prove",
+    description:
+      "Bring assessments, testing, remediation, and evidence together for audit readiness.",
+  },
+] as const;
+
 const portalCards = [
   {
     audience: "Personal",
@@ -882,6 +910,112 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* RAMP Product */}
+        <section
+          id="ramp"
+          className="relative overflow-hidden border-y border-outline-variant/20 bg-surface-container-low/35 px-6 py-20 md:px-8 md:py-28"
+        >
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(231,193,133,0.14),transparent_28%),radial-gradient(circle_at_15%_80%,rgba(177,204,197,0.12),transparent_30%)]" />
+
+          <div className="relative mx-auto max-w-7xl">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
+              <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center">
+                <motion.div variants={itemVariants}>
+                  <p className="inline-flex rounded-full border border-tertiary/35 bg-tertiary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+                    RAMP · CyberPosture
+                  </p>
+
+                  <h2 className="mt-6 max-w-3xl font-display text-4xl leading-[1.02] text-on-surface md:text-6xl">
+                    From cyber risk to audit readiness — in one workflow.
+                  </h2>
+
+                  <p className="mt-6 max-w-2xl text-base leading-8 text-on-surface-variant md:text-lg">
+                    RAMP connects control assessment, AI posture, risk
+                    quantification, remediation, and audit evidence so teams
+                    can understand risk, act on it, and prove progress.
+                  </p>
+
+                  <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <Link
+                      href="/products/ramp"
+                      className="btn-gold inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-bold"
+                    >
+                      Explore RAMP
+                      <span className="material-symbols-outlined text-lg">
+                        arrow_forward
+                      </span>
+                    </Link>
+
+                    <Link
+                      href="/contact/b2b"
+                      className="inline-flex items-center justify-center rounded-xl border border-outline-variant/30 px-6 py-3 text-sm font-bold text-on-surface transition-colors hover:bg-white/5"
+                    >
+                      Request a Demo
+                    </Link>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  variants={itemVariants}
+                  className="rounded-3xl border border-tertiary/25 bg-background/70 p-5 shadow-[0_24px_80px_rgba(0,0,0,0.2)] backdrop-blur-xl md:p-7"
+                >
+                  <div className="flex items-center justify-between gap-4 border-b border-outline-variant/15 pb-5">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-tertiary">
+                        RAMP Readiness Cycle
+                      </p>
+                      <h3 className="mt-2 font-display text-2xl text-on-surface md:text-3xl">
+                        Assess → Quantify → Remediate → Prove
+                      </h3>
+                    </div>
+                    <span className="hidden rounded-full border border-tertiary/25 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-tertiary sm:inline-flex">
+                      Continuous workflow
+                    </span>
+                  </div>
+
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                    {rampHighlights.map((item) => (
+                      <div
+                        key={item.number}
+                        className="rounded-2xl border border-outline-variant/20 bg-surface-container-low/45 p-5"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs font-bold text-tertiary">
+                            {item.number}
+                          </span>
+                          <h4 className="text-lg font-semibold text-on-surface">
+                            {item.title}
+                          </h4>
+                        </div>
+                        <p className="mt-3 text-sm leading-6 text-on-surface-variant">
+                          {item.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 rounded-2xl border border-tertiary/20 bg-tertiary/5 p-5">
+                    <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-on-surface-variant">
+                      <span>Controls</span>
+                      <span className="text-tertiary">→</span>
+                      <span>AI Risk</span>
+                      <span className="text-tertiary">→</span>
+                      <span>Risk &amp; Remediation</span>
+                      <span className="text-tertiary">→</span>
+                      <span>Audit Evidence</span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         <section
           id="choose-path"
           className="border-y border-outline-variant/20 bg-surface-container-low/55 px-6 py-14 md:px-8 md:py-16"
@@ -971,17 +1105,16 @@ export default function HomePage() {
                 variants={itemVariants}
                 className="mt-4 font-display text-4xl leading-tight text-on-surface md:text-6xl"
               >
-                Ready to See Your Human Risk Profile?
+                Ready to Understand Your Security Risk?
               </motion.h2>
 
               <motion.p
                 variants={itemVariants}
                 className="mx-auto mt-6 max-w-3xl text-base leading-8 text-on-surface-variant md:text-lg"
               >
-                Explore how attackers exploit human behavior, measure personal
-                vulnerability, and discover how Human Vulnerability Index helps
-                individuals and organizations reduce exposure before risk
-                becomes reality.
+                Explore your human risk with HVI, or see how RAMP connects
+                cyber risk, AI posture, remediation, and audit readiness for
+                your organization.
               </motion.p>
 
               <motion.div
@@ -993,10 +1126,17 @@ export default function HomePage() {
                     href="/products#simulation"
                     className="btn-gold inline-flex items-center justify-center gap-3 rounded-2xl px-8 py-4 text-[12px] font-bold uppercase tracking-[0.08em]"
                   >
-                    Assess
+                    Assess HVI
                     <span className="material-symbols-outlined text-lg">
                       arrow_forward
                     </span>
+                  </Link>
+
+                  <Link
+                    href="/products/ramp"
+                    className="inline-flex items-center justify-center rounded-2xl border border-tertiary/35 px-8 py-4 text-[12px] font-bold uppercase tracking-[0.08em] text-tertiary transition-colors hover:bg-tertiary/10"
+                  >
+                    Explore RAMP
                   </Link>
 
                   <Link

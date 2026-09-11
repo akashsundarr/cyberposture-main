@@ -2,75 +2,85 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
-const capabilities = [
+const pillars = [
   {
     number: "01",
-    title: "30-Second Core Gap Analysis",
+    title: "Assess",
     description:
-      "Connect the technology stack and instantly identify missing policies, configuration gaps, and architectural weaknesses across your compliance scope.",
-    metric: "30s",
-    label: "Initial assessment",
+      "Assess the controls and requirements that matter to your organization and establish a measurable starting point.",
   },
   {
     number: "02",
-    title: "Tech-Stack Tailored Controls",
+    title: "Understand AI Risk",
     description:
-      "Generate controls, policies, and procedures from the systems you actually operate instead of starting with generic templates.",
-    metric: "18",
-    label: "Frameworks simultaneously",
+      "Assess AI systems and identify gaps that can change your organization's risk profile.",
   },
   {
     number: "03",
-    title: "AI Risk Quantification",
+    title: "Quantify",
     description:
-      "Identify AI-related gaps and quantify how AI deployments increase your organization's inherent risk profile.",
-    metric: "$VaR",
-    label: "AI risk quantified",
+      "Use a FAIR-based Value-at-Risk approach to express selected risks as financial scenarios.",
   },
   {
     number: "04",
-    title: "Internal Audit Readiness",
+    title: "Remediate",
     description:
-      "Validate both the design of controls and their operational effectiveness before entering formal audit workflows.",
-    metric: "ToD",
-    label: "+ ToE",
+      "Turn findings into tracked risk and remediation actions, then re-test as work is completed.",
   },
 ];
 
 const workflow = [
   {
     number: "01",
-    title: "Connect",
+    title: "Assess",
     description:
-      "Connect the systems that define your environment, including cloud infrastructure, identity, source control, and operational tooling.",
+      "Establish your control posture across the business, AI, risk, and audit workflows that apply to your organization.",
   },
   {
     number: "02",
-    title: "Assess",
+    title: "Identify",
     description:
-      "RAMP analyzes your actual technology stack and regulatory scope to identify the controls, policies, and procedures you need.",
+      "Surface control gaps, AI posture gaps, and areas where evidence or risk quantification is incomplete.",
   },
   {
     number: "03",
-    title: "Generate",
+    title: "Act",
     description:
-      "Produce stack-specific control mappings, policies, procedures, and structured evidence instead of manually building them from templates.",
+      "Connect findings to risk and remediation actions with owners, status, and target dates.",
   },
   {
     number: "04",
-    title: "Validate",
+    title: "Prove",
     description:
-      "Run Test of Design and Test of Effectiveness workflows to determine whether controls are structurally sound and operationally effective.",
+      "Re-test controls and bring the resulting evidence together for management, audit, and downstream workflows.",
   },
 ];
 
-const frameworks = [
-  "SOC 2",
-  "ISO 27001",
-  "HIPAA",
-  "NIST AI RMF",
-  "ISO/IEC 42001",
-  "EU AI Act",
+const readinessPillars = [
+  {
+    value: "25%",
+    title: "Design Controls",
+    description:
+      "Design-level control assessment across the scoped Governance workflow.",
+  },
+  {
+    value: "25%",
+    title: "AI Posture",
+    description:
+      "Assessed and cleared registered AI assets within the defined scope.",
+  },
+  {
+    value: "25%",
+    title: "Risk Quantification",
+    description:
+      "Risks and AI assets with a FAIR-based VaR scenario attached.",
+  },
+  {
+    value: "25%",
+    title: "Test of Effectiveness",
+    description:
+      "Control pass rate against the effectiveness test.",
+  },
 ];
 
 const auditModules = [
@@ -78,58 +88,42 @@ const auditModules = [
     title: "Test of Design",
     short: "ToD",
     description:
-      "Validate that tailored controls, policies, and procedures are structurally sound for the target regulations before operational monitoring begins.",
+      "Validate whether controls, policies, and procedures are structurally appropriate for the target requirements.",
   },
   {
     title: "Test of Effectiveness",
     short: "ToE",
     description:
-      "Evaluate whether controls are actually operating as intended and producing the required compliance outcomes.",
+      "Evaluate whether controls are operating as intended and producing the required compliance outcomes.",
   },
   {
-    title: "Internal Audit Plan",
-    short: "Audit",
+    title: "Audit File",
+    short: "Evidence",
     description:
-      "Generate a formal step-by-step audit plan covering ToD and ToE for internal evaluation and audit readiness.",
+      "Bring findings, assessments, remediation, and supporting evidence together for audit preparation and handoff.",
   },
 ];
 
-const comparisonTraditional = [
-  "Consultant-led discovery",
-  "Manual spreadsheets",
-  "Generic policy templates",
-  "Weeks or months of preparation",
-  "High upfront advisory costs",
-];
-
-const comparisonRamp = [
-  "Technology-stack discovery",
-  "Automated control mapping",
-  "Stack-specific policies",
-  "30-second initial assessment",
-  "Ready-to-monitor outputs",
-];
-
-const benefits = [
+const audiences = [
   {
-    title: "Eliminate the Cold Start",
+    title: "Security & Risk Leaders",
     description:
-      "RAMP creates the initial control and policy foundation required before continuous compliance platforms can become useful.",
+      "See where risk sits, what needs attention, and how readiness is changing.",
   },
   {
-    title: "Build From Reality",
+    title: "GRC & Compliance Teams",
     description:
-      "Controls are generated from your actual infrastructure and operating model rather than assumptions about how your organization works.",
+      "Connect controls, assessments, policies, remediation, and evidence.",
   },
   {
-    title: "Reduce Advisory Dependency",
+    title: "Internal Audit",
     description:
-      "Automate the repetitive discovery, mapping, and documentation work that traditionally requires expensive consulting engagements.",
+      "Test both control design and operational effectiveness before formal audit activity.",
   },
   {
-    title: "Ready for Downstream Platforms",
+    title: "Executives & Boards",
     description:
-      "Produce structured, CCM-ready outputs that can feed downstream compliance and continuous-monitoring workflows.",
+      "Turn complex security and AI risk into a concise, decision-ready view.",
   },
 ];
 
@@ -143,17 +137,17 @@ export default function RampPage() {
         <section className="px-6 py-24 md:px-8 md:py-32">
           <div className="mx-auto max-w-6xl text-center">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-              R.A.M.P. · Readiness and Assessment Measurement Protocol
+              RAMP by CyberPosture · Audit Readiness Platform
             </p>
 
-            <h1 className="mt-6 font-display text-5xl leading-[0.95] md:text-7xl">
-              Audit Readiness Built From Your Actual Tech Stack
+            <h1 className="mx-auto mt-6 max-w-5xl font-display text-5xl leading-[0.95] md:text-7xl">
+              From cyber risk to audit readiness — in one continuous workflow.
             </h1>
 
             <p className="mx-auto mt-8 max-w-3xl text-lg leading-8 text-on-surface-variant md:text-xl">
-              An Assessment-as-a-Service engine that analyzes your environment,
-              generates tailored controls and policies, quantifies AI risk, and
-              prepares your organization for formal compliance workflows.
+              RAMP connects control assessment, AI posture, risk
+              quantification, remediation, and audit evidence so your team can
+              understand risk, act on it, and prove progress.
             </p>
 
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
@@ -161,61 +155,60 @@ export default function RampPage() {
                 href="/contact/b2b"
                 className="btn-gold rounded-xl px-8 py-4"
               >
-                Request a Readiness Assessment
+                Request a RAMP Demo
               </Link>
 
               <a
-                href="#how-it-works"
+                href="#readiness-cycle"
                 className="rounded-xl border border-outline-variant/30 px-8 py-4"
               >
-                See How RAMP Works
+                Explore the Readiness Cycle
               </a>
             </div>
 
             <div className="mx-auto mt-16 grid max-w-5xl gap-4 md:grid-cols-3">
               <div className="rounded-2xl border border-outline-variant/20 p-7">
-                <p className="font-display text-4xl">30s</p>
+                <p className="font-display text-4xl">Assess</p>
                 <p className="mt-2 text-sm text-on-surface-variant">
-                  Core gap analysis
+                  Controls & AI posture
                 </p>
               </div>
 
               <div className="rounded-2xl border border-outline-variant/20 p-7">
-                <p className="font-display text-4xl">18</p>
+                <p className="font-display text-4xl">Quantify</p>
                 <p className="mt-2 text-sm text-on-surface-variant">
-                  Frameworks assessed simultaneously
+                  Risk in financial scenarios
                 </p>
               </div>
 
               <div className="rounded-2xl border border-outline-variant/20 p-7">
-                <p className="font-display text-4xl">$VaR</p>
+                <p className="font-display text-4xl">Prove</p>
                 <p className="mt-2 text-sm text-on-surface-variant">
-                  AI risk quantification
+                  Audit-ready evidence
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Positioning */}
+        {/* Problem */}
         <section className="border-y border-outline-variant/10 px-6 py-24 md:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-                  The Cold-Start Problem
+                  The Problem
                 </p>
 
                 <h2 className="mt-4 font-display text-4xl md:text-5xl">
-                  Continuous monitoring is not enough if you are not ready.
+                  Risk is scattered. Readiness should not be.
                 </h2>
 
                 <p className="mt-6 text-lg leading-8 text-on-surface-variant">
-                  Platforms built for continuous compliance work best once
-                  policies, controls, evidence, and operational processes
-                  already exist. RAMP solves the upstream problem: turning an
-                  unprepared environment into a structured, ready-to-monitor
-                  compliance program.
+                  Controls, AI systems, risk registers, remediation, policies,
+                  testing, and audit evidence often live in separate
+                  workflows. RAMP brings those activities into one connected
+                  readiness process.
                 </p>
               </div>
 
@@ -225,22 +218,25 @@ export default function RampPage() {
                 </p>
 
                 <h3 className="mt-4 font-display text-3xl">
-                  The bridge from chaos to compliance readiness.
+                  Connect the work from assessment to proof.
                 </h3>
 
                 <div className="mt-8 space-y-3">
                   {[
-                    "Discover the actual technology environment",
-                    "Identify regulatory and control requirements",
-                    "Generate stack-tailored policies",
-                    "Validate control design",
-                    "Prepare for operational monitoring",
-                  ].map((item) => (
+                    "Assess controls and AI posture",
+                    "Identify gaps and risk",
+                    "Quantify selected exposure",
+                    "Create and track remediation",
+                    "Re-test and prepare evidence",
+                  ].map((item, index) => (
                     <div
                       key={item}
-                      className="rounded-xl border border-outline-variant/20 bg-background p-4"
+                      className="flex items-center gap-4 rounded-xl border border-outline-variant/20 bg-background p-4"
                     >
-                      {item}
+                      <span className="text-sm font-bold text-tertiary">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span>{item}</span>
                     </div>
                   ))}
                 </div>
@@ -249,157 +245,43 @@ export default function RampPage() {
           </div>
         </section>
 
-        {/* Architecture */}
-        <section id="how-it-works" className="px-6 py-24 md:px-8">
+        {/* Readiness cycle */}
+        <section
+          id="readiness-cycle"
+          className="px-6 py-24 md:px-8"
+        >
           <div className="mx-auto max-w-7xl">
             <div className="text-center">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-                RAMP Engine
+                The RAMP Readiness Cycle
               </p>
 
               <h2 className="mt-4 font-display text-4xl md:text-5xl">
-                From Technology Stack to Audit Readiness
+                Assess. Understand. Act. Prove.
               </h2>
 
               <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-on-surface-variant">
-                RAMP connects what your organization actually runs to the
-                controls and evidence required by your compliance objectives.
+                A continuous workflow that connects security posture,
+                AI-related risk, remediation, and audit readiness.
               </p>
             </div>
 
-            <div className="mt-14 rounded-3xl border border-outline-variant/20 p-8 md:p-10">
-              <div className="grid gap-4 md:grid-cols-3">
-                {[
-                  ["AWS", "Cloud infrastructure"],
-                  ["GitHub", "Source control"],
-                  ["Okta", "Identity & access"],
-                ].map(([title, description]) => (
-                  <div
-                    key={title}
-                    className="rounded-xl border border-outline-variant/20 p-6 text-center"
-                  >
-                    <p className="text-xl font-semibold">{title}</p>
-                    <p className="mt-2 text-sm text-on-surface-variant">
-                      {description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="my-8 text-center text-3xl text-tertiary">
-                ↓
-              </div>
-
-              <div className="rounded-2xl border border-tertiary/20 bg-tertiary/5 p-8 text-center">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-                  RAMP Engine
-                </p>
-
-                <h3 className="mt-3 font-display text-3xl">
-                  Analyze · Map · Generate · Validate
-                </h3>
-
-                <p className="mx-auto mt-4 max-w-2xl text-on-surface-variant">
-                  Technology-stack analysis drives customized controls,
-                  policies, procedures, AI risk assessment, and audit
-                  preparation.
-                </p>
-              </div>
-
-              <div className="my-8 text-center text-3xl text-tertiary">
-                ↓
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-3">
-                {[
-                  "Stack-Tailored Controls",
-                  "Policies & Procedures",
-                  "CCM-Ready Outputs",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-xl border border-outline-variant/20 p-5 text-center"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Capabilities */}
-        <section className="border-y border-outline-variant/10 px-6 py-24 md:px-8">
-          <div className="mx-auto max-w-7xl">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-              Core Capabilities
-            </p>
-
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">
-              Five minutes of setup. Seconds of assessment.
-            </h2>
-
-            <div className="mt-12 grid gap-5 md:grid-cols-2">
-              {capabilities.map((item) => (
+            <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {pillars.map((pillar) => (
                 <div
-                  key={item.number}
-                  className="rounded-2xl border border-outline-variant/20 p-8"
-                >
-                  <div className="flex items-start justify-between gap-6">
-                    <span className="text-sm font-bold text-tertiary">
-                      {item.number}
-                    </span>
-
-                    <div className="text-right">
-                      <p className="font-display text-3xl">{item.metric}</p>
-                      <p className="text-xs text-on-surface-variant">
-                        {item.label}
-                      </p>
-                    </div>
-                  </div>
-
-                  <h3 className="mt-8 text-2xl font-semibold">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-4 leading-8 text-on-surface-variant">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Workflow */}
-        <section className="px-6 py-24 md:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl">
-              <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-                Workflow
-              </p>
-
-              <h2 className="mt-4 font-display text-4xl md:text-5xl">
-                One connected readiness workflow.
-              </h2>
-            </div>
-
-            <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-              {workflow.map((step) => (
-                <div
-                  key={step.number}
+                  key={pillar.number}
                   className="rounded-2xl border border-outline-variant/20 p-7"
                 >
                   <span className="text-sm font-bold text-tertiary">
-                    {step.number}
+                    {pillar.number}
                   </span>
 
                   <h3 className="mt-7 font-display text-3xl">
-                    {step.title}
+                    {pillar.title}
                   </h3>
 
                   <p className="mt-4 leading-7 text-on-surface-variant">
-                    {step.description}
+                    {pillar.description}
                   </p>
                 </div>
               ))}
@@ -407,48 +289,238 @@ export default function RampPage() {
           </div>
         </section>
 
-        {/* Frameworks */}
+        {/* Product experience */}
         <section className="border-y border-outline-variant/10 px-6 py-24 md:px-8">
           <div className="mx-auto max-w-7xl">
-            <div className="text-center">
+            <div className="max-w-3xl">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-                Framework Coverage
+                Inside RAMP
               </p>
 
               <h2 className="mt-4 font-display text-4xl md:text-5xl">
-                Prepare for the frameworks converging on your organization.
+                One system. Multiple views of readiness.
               </h2>
 
-              <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-on-surface-variant">
-                RAMP brings traditional security frameworks and emerging AI
-                governance requirements into the same readiness workflow.
+              <p className="mt-6 text-lg leading-8 text-on-surface-variant">
+                Show the product through the decisions it helps teams make,
+                rather than through a collection of disconnected dashboard
+                screens.
               </p>
             </div>
 
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {frameworks.map((framework) => (
-                <div
-                  key={framework}
-                  className="rounded-2xl border border-outline-variant/20 p-7 text-center"
-                >
-                  <p className="font-display text-2xl">{framework}</p>
-                </div>
-              ))}
+            <div className="mt-12 grid gap-6 lg:grid-cols-3">
+              <div className="rounded-2xl border border-outline-variant/20 p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-tertiary">
+                  01 · Readiness
+                </p>
+                <h3 className="mt-5 text-2xl font-semibold">
+                  Know where you stand.
+                </h3>
+                <p className="mt-4 leading-7 text-on-surface-variant">
+                  A consolidated readiness view brings the core assessment
+                  pillars together instead of forcing teams to interpret
+                  separate module scores.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-outline-variant/20 p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-tertiary">
+                  02 · AI Risk
+                </p>
+                <h3 className="mt-5 text-2xl font-semibold">
+                  Put AI risk into business terms.
+                </h3>
+                <p className="mt-4 leading-7 text-on-surface-variant">
+                  FAIR-based Value-at-Risk scenarios can translate selected AI
+                  risks into financial ranges that can support business
+                  decisions.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-outline-variant/20 p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-tertiary">
+                  03 · Audit
+                </p>
+                <h3 className="mt-5 text-2xl font-semibold">
+                  Know what still needs proof.
+                </h3>
+                <p className="mt-4 leading-7 text-on-surface-variant">
+                  Track design and effectiveness testing, remediation, and
+                  supporting evidence as you move toward audit readiness.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Internal Audit */}
+        {/* Gap to action */}
         <section className="px-6 py-24 md:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-                  Internal Audit Module
+                  Gap → Risk → Action
                 </p>
 
                 <h2 className="mt-4 font-display text-4xl md:text-5xl">
-                  Test the design. Test the operation.
+                  Don't just identify gaps. Move them toward closure.
+                </h2>
+
+                <p className="mt-6 text-lg leading-8 text-on-surface-variant">
+                  When a control fails a design or effectiveness test, the
+                  finding can feed the risk and remediation workflows. As work
+                  is completed, controls can be re-tested and readiness can
+                  reflect the result.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  ["01", "Gap identified", "A control or AI posture gap is found."],
+                  ["02", "Risk captured", "The issue is connected to a tracked risk."],
+                  ["03", "Remediation assigned", "An action can be given an owner and target date."],
+                  ["04", "Re-test & score", "Completed work can be verified and reflected in readiness."],
+                ].map(([number, title, description]) => (
+                  <div
+                    key={number}
+                    className="rounded-2xl border border-outline-variant/20 p-6"
+                  >
+                    <div className="flex gap-5">
+                      <span className="text-sm font-bold text-tertiary">
+                        {number}
+                      </span>
+                      <div>
+                        <h3 className="text-xl font-semibold">{title}</h3>
+                        <p className="mt-2 leading-7 text-on-surface-variant">
+                          {description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* AI risk */}
+        <section className="border-y border-outline-variant/10 px-6 py-24 md:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="rounded-3xl border border-tertiary/20 bg-tertiary/5 p-8 md:p-12">
+              <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+                    AI Risk Quantification
+                  </p>
+
+                  <h2 className="mt-4 font-display text-4xl md:text-5xl">
+                    AI risk, expressed in business terms.
+                  </h2>
+
+                  <p className="mt-6 text-lg leading-8 text-on-surface-variant">
+                    RAMP uses a FAIR-based Value-at-Risk approach to model
+                    selected scenarios using risk-specific inputs. The goal is
+                    to move beyond a simple red/amber/green label and give
+                    decision-makers a financial view of exposure.
+                  </p>
+
+                  <p className="mt-5 text-sm leading-7 text-on-surface-variant">
+                    Example scenarios should be clearly labelled as
+                    illustrative unless they represent verified customer data.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-outline-variant/20 bg-background p-7">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-tertiary">
+                    Illustrative scenario
+                  </p>
+
+                  <div className="mt-8 grid grid-cols-3 gap-4 text-center">
+                    <div>
+                      <p className="font-display text-3xl">$118K</p>
+                      <p className="mt-2 text-xs text-on-surface-variant">
+                        Best case
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-display text-3xl">$412K</p>
+                      <p className="mt-2 text-xs text-on-surface-variant">
+                        Likely case
+                      </p>
+                    </div>
+                    <div>
+                      <p className="font-display text-3xl">$1.9M</p>
+                      <p className="mt-2 text-xs text-on-surface-variant">
+                        Worst case
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 border-t border-outline-variant/20 pt-6">
+                    <p className="text-sm font-semibold">Scenario inputs</p>
+                    <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-on-surface-variant">
+                      <span>Autonomy</span>
+                      <span>Access</span>
+                      <span>Threat actor</span>
+                      <span>Data sensitivity</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Readiness scoring */}
+        <section className="px-6 py-24 md:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="text-center">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+                Readiness Scoring
+              </p>
+
+              <h2 className="mt-4 font-display text-4xl md:text-5xl">
+                A readiness score you can explain.
+              </h2>
+
+              <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-on-surface-variant">
+                The RAMP model uses four equally weighted pillars. Each pillar
+                contributes 25% to the overall readiness score.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {readinessPillars.map((pillar) => (
+                <div
+                  key={pillar.title}
+                  className="rounded-2xl border border-outline-variant/20 p-7"
+                >
+                  <p className="font-display text-3xl text-tertiary">
+                    {pillar.value}
+                  </p>
+                  <h3 className="mt-5 text-xl font-semibold">
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-3 leading-7 text-on-surface-variant">
+                    {pillar.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Audit readiness */}
+        <section className="border-y border-outline-variant/10 px-6 py-24 md:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+                  Audit Readiness
+                </p>
+
+                <h2 className="mt-4 font-display text-4xl md:text-5xl">
+                  Test the design. Test the operation. Prepare the evidence.
                 </h2>
 
                 <p className="mt-6 text-lg leading-8 text-on-surface-variant">
@@ -465,10 +537,7 @@ export default function RampPage() {
                     className="rounded-2xl border border-outline-variant/20 p-7"
                   >
                     <div className="flex items-center justify-between gap-5">
-                      <h3 className="text-xl font-semibold">
-                        {module.title}
-                      </h3>
-
+                      <h3 className="text-xl font-semibold">{module.title}</h3>
                       <span className="rounded-full border border-tertiary/30 px-3 py-1 text-xs font-bold text-tertiary">
                         {module.short}
                       </span>
@@ -484,77 +553,28 @@ export default function RampPage() {
           </div>
         </section>
 
-        {/* Comparison */}
-        <section className="border-y border-outline-variant/10 px-6 py-24 md:px-8">
+        {/* Audience */}
+        <section className="px-6 py-24 md:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="text-center">
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-                The Difference
+                Built for the people responsible for proving security
               </p>
 
               <h2 className="mt-4 font-display text-4xl md:text-5xl">
-                Traditional Audit Prep vs R.A.M.P.
+                One view of readiness. Different decisions for every team.
               </h2>
             </div>
 
-            <div className="mt-12 grid gap-6 lg:grid-cols-2">
-              <div className="rounded-2xl border border-outline-variant/20 p-8">
-                <h3 className="text-2xl font-semibold">
-                  Traditional Approach
-                </h3>
-
-                <ul className="mt-7 space-y-4">
-                  {comparisonTraditional.map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-3 text-on-surface-variant"
-                    >
-                      <span>—</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="rounded-2xl border border-tertiary/20 bg-tertiary/5 p-8">
-                <h3 className="text-2xl font-semibold">R.A.M.P.</h3>
-
-                <ul className="mt-7 space-y-4">
-                  {comparisonRamp.map((item) => (
-                    <li key={item} className="flex gap-3">
-                      <span className="text-tertiary">+</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Benefits */}
-        <section className="px-6 py-24 md:px-8">
-          <div className="mx-auto max-w-7xl">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-              Business Value
-            </p>
-
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">
-              Why RAMP exists.
-            </h2>
-
-            <div className="mt-12 grid gap-5 md:grid-cols-2">
-              {benefits.map((benefit) => (
+            <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {audiences.map((audience) => (
                 <div
-                  key={benefit.title}
-                  className="rounded-2xl border border-outline-variant/20 p-8"
+                  key={audience.title}
+                  className="rounded-2xl border border-outline-variant/20 p-7"
                 >
-                  <h3 className="text-2xl font-semibold">
-                    {benefit.title}
-                  </h3>
-
-                  <p className="mt-4 leading-8 text-on-surface-variant">
-                    {benefit.description}
+                  <h3 className="text-xl font-semibold">{audience.title}</h3>
+                  <p className="mt-4 leading-7 text-on-surface-variant">
+                    {audience.description}
                   </p>
                 </div>
               ))}
@@ -562,61 +582,53 @@ export default function RampPage() {
           </div>
         </section>
 
-        {/* Distribution / Downstream */}
-        <section className="border-y border-outline-variant/10 px-6 py-24 md:px-8">
-          <div className="mx-auto max-w-6xl text-center">
+        {/* Frameworks */}
+        <section className="border-y border-outline-variant/10 px-6 py-20 md:px-8">
+          <div className="mx-auto max-w-5xl text-center">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-              Ready-to-Monitor
+              Frameworks & Requirements
             </p>
 
-            <h2 className="mt-4 font-display text-4xl md:text-5xl">
-              The upstream layer for continuous compliance.
+            <h2 className="mt-4 font-display text-3xl md:text-4xl">
+              Bring the requirements that matter to your readiness workflow.
             </h2>
 
-            <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-on-surface-variant">
-              RAMP prepares organizations that are not yet mature enough for
-              downstream continuous-monitoring platforms, creating a structured
-              handoff into the compliance ecosystem.
+            <p className="mx-auto mt-5 max-w-3xl leading-7 text-on-surface-variant">
+              Display only the frameworks and regulatory requirements that are
+              currently supported and verified for the RAMP product.
             </p>
 
-            <div className="mt-12 grid gap-4 md:grid-cols-3">
-              {["Drata", "Vanta", "Secureframe"].map((platform) => (
-                <div
-                  key={platform}
-                  className="rounded-xl border border-tertiary/20 bg-tertiary/5 p-6"
-                >
-                  <p className="text-xl font-semibold">{platform}</p>
-                  <p className="mt-2 text-sm text-on-surface-variant">
-                    Downstream monitoring
-                  </p>
-                </div>
-              ))}
+            <div className="mt-10 rounded-2xl border border-outline-variant/20 p-7">
+              <p className="text-sm text-on-surface-variant">
+                Add verified framework logos and coverage details here.
+                Avoid implying support until each integration or mapping has
+                been confirmed.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* CTA */}
+        {/* Final CTA */}
         <section className="px-6 py-28 md:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
-              Get Started
+              RAMP by CyberPosture
             </p>
 
             <h2 className="mt-4 font-display text-5xl md:text-6xl">
-              Go From Cold Start to Ready-to-Monitor.
+              Make your next audit easier to prove.
             </h2>
 
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-on-surface-variant">
-              Assess your environment, generate your controls, validate your
-              readiness, and enter your formal compliance workflow with a
-              foundation built for your actual technology stack.
+              Understand your posture, prioritize risk, drive remediation, and
+              build a stronger evidence trail before the audit begins.
             </p>
 
             <Link
               href="/contact/b2b"
               className="btn-gold mt-10 inline-flex rounded-xl px-8 py-4"
             >
-              Request a Readiness Assessment
+              Request a RAMP Demo
             </Link>
           </div>
         </section>

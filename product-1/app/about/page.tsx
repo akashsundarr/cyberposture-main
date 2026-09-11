@@ -1,3 +1,5 @@
+
+
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -142,7 +144,65 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            
+
+          </div>
+        </section>
+
+        {/* RAMP */}
+        <section id="ramp" className="px-6 py-24 md:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="grid items-center gap-12 lg:grid-cols-2">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-tertiary">
+                  RAMP · CyberPosture
+                </p>
+                <h2 className="mt-4 font-display text-4xl leading-tight text-on-surface md:text-5xl">
+                  From cyber risk to audit readiness — in one workflow.
+                </h2>
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-on-surface-variant">
+                  RAMP brings control assessment, AI posture, risk quantification,
+                  remediation, and audit evidence into one continuous readiness
+                  workflow. It helps organizations understand what is at risk,
+                  what needs to change, and what can be demonstrated to auditors.
+                </p>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <a href="/products/ramp" className="btn-gold rounded-xl px-7 py-3.5">
+                    Explore RAMP
+                  </a>
+                  <a
+                    href="/contact/b2b"
+                    className="rounded-xl border border-outline-variant/30 px-7 py-3.5"
+                  >
+                    Request a Demo
+                  </a>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-tertiary/20 bg-tertiary/5 p-8">
+                <p className="text-sm font-semibold uppercase tracking-[0.14em] text-tertiary">
+                  RAMP Readiness Cycle
+                </p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                  {[
+                    ["01", "Assess", "Evaluate controls and AI posture"],
+                    ["02", "Quantify", "Understand risk in business terms"],
+                    ["03", "Remediate", "Turn gaps into actionable improvements"],
+                    ["04", "Prove", "Maintain testing and audit evidence"],
+                  ].map(([number, title, description]) => (
+                    <div
+                      key={number}
+                      className="rounded-2xl border border-outline-variant/20 bg-background/60 p-5"
+                    >
+                      <span className="text-xs font-bold text-tertiary">{number}</span>
+                      <h3 className="mt-2 text-xl font-semibold text-on-surface">{title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-on-surface-variant">
+                        {description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -247,13 +307,20 @@ export default function AboutPage() {
             </p>
 
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-on-surface-variant">
-              Explore Human Vulnerability Index and discover how measuring human
-              risk can improve security outcomes.
+              Explore Human Vulnerability Index for human risk and RAMP for cyber risk,
+              AI posture, remediation, and audit readiness.
             </p>
 
             <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
               <a href="/products" className="btn-gold rounded-xl px-8 py-4">
-                Explore The Product
+                Explore HVI
+              </a>
+
+              <a
+                href="/products/ramp"
+                className="rounded-xl border border-outline-variant/30 px-8 py-4"
+              >
+                Explore RAMP
               </a>
 
               <a
